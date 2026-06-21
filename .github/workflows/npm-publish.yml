@@ -1,0 +1,26 @@
+name: Publish
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+      - name: Strip placeholder token so OIDC engages
+        run: |
+          sed -i '/:_authToken=/d; /always-auth/d' "$NPM_CONFIG_USERCONFIG"
+          cat "$NPM_CONFIG_USERCONFIG"
+      - run: npm install
+      - run: npm publish

@@ -1,7 +1,7 @@
 {
-  "name": "TODO",
-  "version": "0.0.0",
-  "description": "TODO",
+  "name": "unspan",
+  "version": "1.0.0",
+  "description": "Convert ordered numbers into inclusive spans using customizable adjacency rules",
   "author": "elzup",
   "license": "MIT",
   "type": "module",
@@ -15,14 +15,17 @@
       "require": "./lib/cjs/index.js"
     }
   },
-  "repository": "elzup/TODO",
+  "repository": "elzup/unspan",
   "bugs": {
-    "url": "https://github.com/elzup/TODO/issues"
+    "url": "https://github.com/elzup/unspan/issues"
   },
-  "homepage": "https://github.com/elzup/TODO#readme",
+  "homepage": "https://github.com/elzup/unspan#readme",
   "keywords": [
-    "utils",
-    "personal"
+    "array",
+    "interval",
+    "range",
+    "span",
+    "typescript"
   ],
   "engines": {
     "node": ">=18"

@@ -1,1 +1,2 @@
-export { add } from "./unit.js"
+export { unspan } from "./unit.js"
+export type { IsAdjacent, Span } from "./unit.js"
