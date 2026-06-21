@@ -2,6 +2,8 @@
 
 > `[1,2,3,4,5] => [1,5]` Convert sequential numbers to ranges.
 
+![rangeize folds consecutive numbers into inclusive ranges](./assets/rangeize.svg)
+
 ## Install
 
 ```sh
