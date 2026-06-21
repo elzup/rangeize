@@ -1,7 +1,7 @@
 {
-  "name": "TODO",
-  "version": "0.0.0",
-  "description": "TODO",
+  "name": "rangeize",
+  "version": "1.0.0",
+  "description": "[1,2,3,4,5] => [1,5] Convert sequential numbers to ranges",
   "author": "elzup",
   "license": "MIT",
   "type": "module",
@@ -15,17 +15,23 @@
       "require": "./lib/cjs/index.js"
     }
   },
-  "repository": "elzup/TODO",
-  "bugs": {
-    "url": "https://github.com/elzup/TODO/issues"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elzup/rangeize.git"
   },
-  "homepage": "https://github.com/elzup/TODO#readme",
+  "bugs": {
+    "url": "https://github.com/elzup/rangeize/issues"
+  },
+  "homepage": "https://github.com/elzup/rangeize#readme",
   "keywords": [
-    "utils",
-    "personal"
+    "array",
+    "interval",
+    "range",
+    "span",
+    "typescript"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=20.19"
   },
   "scripts": {
     "clean": "rimraf lib",
@@ -41,6 +47,7 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:cov": "vitest run --coverage",
+    "bench": "vitest bench --run",
     "prepublishOnly": "npm run build && npm test"
   },
   "files": [
