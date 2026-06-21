@@ -15,7 +15,10 @@
       "require": "./lib/cjs/index.js"
     }
   },
-  "repository": "elzup/unspan",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elzup/unspan.git"
+  },
   "bugs": {
     "url": "https://github.com/elzup/unspan/issues"
   },
