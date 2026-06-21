@@ -12,7 +12,7 @@ const isConsecutive: IsAdjacent = (left, right) => left + 1 === right
  * that accepts a smaller `right` on unsorted input can yield an inverted span
  * (`start > end`).
  */
-export const unspan = (
+export const rangeize = (
   values: readonly number[],
   isAdjacent: IsAdjacent = isConsecutive,
 ): Span[] => {

@@ -1,6 +1,6 @@
 import { bench, describe } from "vitest"
 
-import { unspan } from "../index.js"
+import { rangeize } from "../index.js"
 
 // Dense input: long consecutive runs that collapse into few spans.
 const dense = Array.from({ length: 10_000 }, (_, i) => i)
@@ -11,20 +11,20 @@ const sparse = Array.from({ length: 10_000 }, (_, i) => i * 2)
 // Mixed input: alternating runs of consecutive and gapped values.
 const mixed = Array.from({ length: 10_000 }, (_, i) => i + Math.floor(i / 5))
 
-describe("unspan", () => {
+describe("rangeize", () => {
   bench("dense (single long run)", () => {
-    unspan(dense)
+    rangeize(dense)
   })
 
   bench("sparse (every value isolated)", () => {
-    unspan(sparse)
+    rangeize(sparse)
   })
 
   bench("mixed (alternating runs)", () => {
-    unspan(mixed)
+    rangeize(mixed)
   })
 
   bench("custom adjacency rule", () => {
-    unspan(mixed, (left, right) => right - left <= 2)
+    rangeize(mixed, (left, right) => right - left <= 2)
   })
 })

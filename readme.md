@@ -1,19 +1,19 @@
-# unspan
+# rangeize
 
-> Convert ordered numbers into inclusive spans using customizable adjacency rules.
+> `[1,2,3,4,5] => [1,5]` Convert sequential numbers to ranges.
 
 ## Install
 
 ```sh
-npm install unspan
+npm install rangeize
 ```
 
 ## Usage
 
 ```ts
-import { unspan } from "unspan"
+import { rangeize } from "rangeize"
 
-unspan([2, 3, 4, 10, 21, 22, 23])
+rangeize([2, 3, 4, 10, 21, 22, 23])
 // [
 //   { start: 2, end: 4 },
 //   { start: 10, end: 10 },
@@ -24,7 +24,7 @@ unspan([2, 3, 4, 10, 21, 22, 23])
 Pass a custom adjacency rule when consecutive values follow a different rule:
 
 ```ts
-unspan([1, 2, 4, 10, 12], (left, right) => right - left <= 2)
+rangeize([1, 2, 4, 10, 12], (left, right) => right - left <= 2)
 // [
 //   { start: 1, end: 4 },
 //   { start: 10, end: 12 },
@@ -42,7 +42,7 @@ Input order is preserved. Sort the input first when numeric ordering is required
   (`start > end`) — keep the rule monotonic, i.e. only return `true` when
   `left < right`.
 - Duplicate values are not adjacent under the default rule, so they split into
-  separate spans: `unspan([1, 1, 2])` → `[{ start: 1, end: 1 }, { start: 1, end: 2 }]`.
+  separate spans: `rangeize([1, 1, 2])` → `[{ start: 1, end: 1 }, { start: 1, end: 2 }]`.
 
 ## License
 
