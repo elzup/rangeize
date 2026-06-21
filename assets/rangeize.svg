@@ -1,0 +1,66 @@
+<svg width="660" height="200" viewBox="0 0 660 200" xmlns="http://www.w3.org/2000/svg"
+     font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <rect x="0" y="0" width="660" height="200" rx="12" fill="#ffffff"/>
+
+  <!-- title -->
+  <text x="56" y="24" fill="#202124" font-size="13" font-weight="700">rangeize — fold consecutive numbers into inclusive ranges</text>
+
+  <!-- guide lines at ticks 0,5,10,15,20 -->
+  <g stroke="#e6e8ec" stroke-width="1">
+    <line x1="56" y1="50" x2="56" y2="170"/>
+    <line x1="176" y1="50" x2="176" y2="170"/>
+    <line x1="296" y1="50" x2="296" y2="170"/>
+    <line x1="416" y1="50" x2="416" y2="170"/>
+    <line x1="536" y1="50" x2="536" y2="170"/>
+  </g>
+  <g fill="#9aa0a6" font-size="11" text-anchor="middle">
+    <text x="56" y="46">0</text>
+    <text x="176" y="46">5</text>
+    <text x="296" y="46">10</text>
+    <text x="416" y="46">15</text>
+    <text x="536" y="46">20</text>
+  </g>
+
+  <!-- top row: input numbers, colored by the run they belong to -->
+  <g fill="#5f6368" font-size="11" text-anchor="end">
+    <text x="50" y="73">in</text>
+  </g>
+  <g font-size="12" font-weight="700" text-anchor="middle">
+    <!-- run A (blue): 2,3,4 -->
+    <rect x="93"  y="56" width="22" height="26" rx="4" fill="#4C8BF5"/>
+    <text x="104" y="73" fill="#fff">2</text>
+    <rect x="117" y="56" width="22" height="26" rx="4" fill="#4C8BF5"/>
+    <text x="128" y="73" fill="#fff">3</text>
+    <rect x="141" y="56" width="22" height="26" rx="4" fill="#4C8BF5"/>
+    <text x="152" y="73" fill="#fff">4</text>
+    <!-- run B (green): 10 -->
+    <rect x="285" y="56" width="22" height="26" rx="4" fill="#34A853"/>
+    <text x="296" y="73" fill="#fff">10</text>
+    <!-- run C (purple): 21,22,23 -->
+    <rect x="549" y="56" width="22" height="26" rx="4" fill="#A142F4"/>
+    <text x="560" y="73" fill="#fff">21</text>
+    <rect x="573" y="56" width="22" height="26" rx="4" fill="#A142F4"/>
+    <text x="584" y="73" fill="#fff">22</text>
+    <rect x="597" y="56" width="22" height="26" rx="4" fill="#A142F4"/>
+    <text x="608" y="73" fill="#fff">23</text>
+  </g>
+
+  <!-- transform caption -->
+  <text x="344" y="104" fill="#5f6368" font-size="12" font-weight="600" text-anchor="middle">rangeize( )   ↓   merge adjacent values (left + 1 === right)</text>
+
+  <!-- bottom row: resulting ranges as bars -->
+  <g fill="#5f6368" font-size="11" text-anchor="end">
+    <text x="50" y="135">out</text>
+  </g>
+  <g font-size="12" font-weight="600" text-anchor="middle">
+    <rect x="93"  y="120" width="70" height="22" rx="4" fill="#4C8BF5"/>
+    <text x="128" y="135" fill="#fff">2 – 4</text>
+    <rect x="285" y="120" width="22" height="22" rx="4" fill="#34A853"/>
+    <text x="296" y="135" fill="#fff">10</text>
+    <rect x="549" y="120" width="70" height="22" rx="4" fill="#A142F4"/>
+    <text x="584" y="135" fill="#fff">21 – 23</text>
+  </g>
+
+  <!-- caption -->
+  <text x="56" y="186" fill="#9aa0a6" font-size="11">[2, 3, 4, 10, 21, 22, 23]  →  [ {start:2, end:4}, {start:10, end:10}, {start:21, end:23} ]</text>
+</svg>
