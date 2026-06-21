@@ -1,41 +1,45 @@
 export type Span = Readonly<{ start: number; end: number }>
 export type IsAdjacent = (left: number, right: number) => boolean
 
-type State = Readonly<{
-  current: Span | null
-  completed: readonly Span[]
-}>
-
 const isConsecutive: IsAdjacent = (left, right) => left + 1 === right
-
-const appendNumber = (state: State, value: number, isAdjacent: IsAdjacent): State => {
-  if (state.current === null) {
-    return { current: { start: value, end: value }, completed: state.completed }
-  }
-
-  if (isAdjacent(state.current.end, value)) {
-    return { current: { ...state.current, end: value }, completed: state.completed }
-  }
-
-  return {
-    current: { start: value, end: value },
-    completed: [...state.completed, state.current],
-  }
-}
 
 /**
  * Converts ordered numbers into inclusive spans.
  *
  * Input order is preserved. Sort the input first when numeric ordering is required.
+ *
+ * `isAdjacent` is assumed to be monotonic (only true when `left < right`); a rule
+ * that accepts a smaller `right` on unsorted input can yield an inverted span
+ * (`start > end`).
  */
 export const unspan = (
   values: readonly number[],
   isAdjacent: IsAdjacent = isConsecutive,
 ): Span[] => {
-  const state = values.reduce<State>(
-    (currentState, value) => appendNumber(currentState, value, isAdjacent),
-    { current: null, completed: [] },
-  )
+  // Local accumulation only — the input is never mutated and each emitted Span is
+  // a fresh frozen object, so the function stays pure to callers. Appending to a
+  // local array keeps this O(n) instead of the O(n^2) of spreading on every split.
+  const spans: Span[] = []
+  let current: Span | null = null
 
-  return state.current === null ? [] : [...state.completed, state.current]
+  for (const value of values) {
+    if (current === null) {
+      current = { start: value, end: value }
+      continue
+    }
+
+    if (isAdjacent(current.end, value)) {
+      current = { start: current.start, end: value }
+      continue
+    }
+
+    spans.push(current)
+    current = { start: value, end: value }
+  }
+
+  if (current !== null) {
+    spans.push(current)
+  }
+
+  return spans
 }

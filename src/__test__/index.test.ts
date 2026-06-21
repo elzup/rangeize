@@ -20,6 +20,17 @@ describe("unspan", () => {
     ])
   })
 
+  it("wraps a single value in a one-element span", () => {
+    expect(unspan([42])).toStrictEqual([{ start: 42, end: 42 }])
+  })
+
+  it("splits duplicate values into separate spans under the default rule", () => {
+    expect(unspan([1, 1, 2])).toStrictEqual([
+      { start: 1, end: 1 },
+      { start: 1, end: 2 },
+    ])
+  })
+
   it("supports a custom adjacency rule", () => {
     expect(unspan([1, 2, 4, 10, 12], (left, right) => right - left <= 2)).toStrictEqual([
       { start: 1, end: 4 },
