@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+# CI-equivalent gate run before every `git push`.
+# Mirrors .github/workflows/node.yml (lint / test / build) plus a format check.
+# Bypass in an emergency with: git push --no-verify
+set -e
+
+run() {
+  echo "▶ $1"
+  shift
+  "$@"
+}
+
+echo "── pre-push checks ──"
+run "format" pnpm run format
+run "lint" pnpm run lint
+run "test" pnpm test
+run "build" pnpm run build
+echo "✓ pre-push passed"

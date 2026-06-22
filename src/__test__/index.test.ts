@@ -32,7 +32,9 @@ describe("rangeize", () => {
   })
 
   it("supports a custom adjacency rule", () => {
-    expect(rangeize([1, 2, 4, 10, 12], (left, right) => right - left <= 2)).toStrictEqual([
+    expect(
+      rangeize([1, 2, 4, 10, 12], (left, right) => right - left <= 2)
+    ).toStrictEqual([
       { start: 1, end: 4 },
       { start: 10, end: 12 },
     ])

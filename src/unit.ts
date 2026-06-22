@@ -14,7 +14,7 @@ const isConsecutive: IsAdjacent = (left, right) => left + 1 === right
  */
 export const rangeize = (
   values: readonly number[],
-  isAdjacent: IsAdjacent = isConsecutive,
+  isAdjacent: IsAdjacent = isConsecutive
 ): Span[] => {
   // Local accumulation only — the input is never mutated and each emitted Span is
   // a fresh frozen object, so the function stays pure to callers. Appending to a
