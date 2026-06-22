@@ -2,29 +2,38 @@ import { bench, describe } from "vitest"
 
 import { rangeize } from "../index.js"
 
+const SIZES = [1_000, 10_000, 100_000]
+
 // Dense input: long consecutive runs that collapse into few spans.
-const dense = Array.from({ length: 10_000 }, (_, i) => i)
+const dense = (n: number) => Array.from({ length: n }, (_, i) => i)
 
 // Sparse input: every value is isolated, so every value becomes its own span.
-const sparse = Array.from({ length: 10_000 }, (_, i) => i * 2)
+const sparse = (n: number) => Array.from({ length: n }, (_, i) => i * 2)
 
 // Mixed input: alternating runs of consecutive and gapped values.
-const mixed = Array.from({ length: 10_000 }, (_, i) => i + Math.floor(i / 5))
+const mixed = (n: number) =>
+  Array.from({ length: n }, (_, i) => i + Math.floor(i / 5))
 
-describe("rangeize", () => {
-  bench("dense (single long run)", () => {
-    rangeize(dense)
-  })
+for (const n of SIZES) {
+  const denseInput = dense(n)
+  const sparseInput = sparse(n)
+  const mixedInput = mixed(n)
 
-  bench("sparse (every value isolated)", () => {
-    rangeize(sparse)
-  })
+  describe(`rangeize (${n.toLocaleString("en-US")} items)`, () => {
+    bench("dense (single long run)", () => {
+      rangeize(denseInput)
+    })
 
-  bench("mixed (alternating runs)", () => {
-    rangeize(mixed)
-  })
+    bench("sparse (every value isolated)", () => {
+      rangeize(sparseInput)
+    })
 
-  bench("custom adjacency rule", () => {
-    rangeize(mixed, (left, right) => right - left <= 2)
+    bench("mixed (alternating runs)", () => {
+      rangeize(mixedInput)
+    })
+
+    bench("custom adjacency rule", () => {
+      rangeize(mixedInput, (left, right) => right - left <= 2)
+    })
   })
-})
+}

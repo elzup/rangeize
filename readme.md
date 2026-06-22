@@ -46,6 +46,23 @@ Input order is preserved. Sort the input first when numeric ordering is required
 - Duplicate values are not adjacent under the default rule, so they split into
   separate spans: `rangeize([1, 1, 2])` → `[{ start: 1, end: 1 }, { start: 1, end: 2 }]`.
 
+## Performance
+
+`rangeize` runs in `O(n)` — a single pass that folds each value into the current
+span or opens a new one. Measured mean per call on an M-series laptop
+(`npm run build && npm run bench`):
+
+| Data Size     | dense (one long run) | mixed (alternating runs) | sparse (all isolated) |
+| ------------- | -------------------- | ------------------------ | --------------------- |
+| 1,000 items   | ~0.007 ms            | ~0.008 ms                | ~0.010 ms             |
+| 10,000 items  | ~0.10 ms             | ~0.11 ms                 | ~0.15 ms              |
+| 100,000 items | ~1.3 ms              | ~1.1 ms                  | ~2.7 ms               |
+
+Time scales linearly with input length. Sparse input is the slowest case because
+every value opens its own span (maximum output size); dense and mixed inputs
+collapse into fewer spans and stay faster. A custom adjacency rule adds only the
+cost of the predicate call and tracks the mixed numbers closely.
+
 ## License
 
 MIT © [elzup](https://github.com/elzup)
