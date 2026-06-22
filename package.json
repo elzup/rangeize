@@ -1,6 +1,6 @@
 {
   "name": "rangeize",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "[1,2,3,4,5] => [1,5] Convert sequential numbers to ranges",
   "author": "elzup",
   "license": "MIT",
