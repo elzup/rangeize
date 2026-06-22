@@ -15,11 +15,11 @@ npm install rangeize
 ```ts
 import { rangeize } from "rangeize"
 
-rangeize([2, 3, 4, 10, 21, 22, 23])
+rangeize([2, 3, 4, 5, 7, 11, 12])
 // [
-//   { start: 2, end: 4 },
-//   { start: 10, end: 10 },
-//   { start: 21, end: 23 },
+//   { start: 2, end: 5 },
+//   { start: 7, end: 7 },
+//   { start: 11, end: 12 },
 // ]
 ```
 
