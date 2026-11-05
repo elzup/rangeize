@@ -42,6 +42,9 @@ jobs:
       - name: Test coverage
         run: pnpm test:cov
         if: matrix.node-version == '22.x'
+      - name: Run mutation tests
+        run: pnpm test:mutation
+        if: matrix.node-version == '22.x'
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         if: matrix.node-version == '22.x'
