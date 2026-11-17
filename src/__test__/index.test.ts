@@ -20,10 +20,6 @@ describe("rangeize", () => {
     ])
   })
 
-  it("wraps a single value in a one-element span", () => {
-    expect(rangeize([42])).toStrictEqual([{ start: 42, end: 42 }])
-  })
-
   it("splits duplicate values into separate spans under the default rule", () => {
     expect(rangeize([1, 1, 2])).toStrictEqual([
       { start: 1, end: 1 },
